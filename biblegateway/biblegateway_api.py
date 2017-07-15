@@ -196,9 +196,11 @@ def getVotd(version=default_version):
 
     url = urls['votd']
     response = urllib2.urlopen(url)
-    data = response.read()
+    jsonData = json.load(response)
+    outputString = jsonData['votd']['reference'] + ": " + jsonData['votd']['content']
 
-    return{'version' : version, 'text' : get_passage(data['votd']['reference'])} #my code, trying to only extract information I need
+    return outputString
+    #return{'version' : version, 'text' : get_passage(data['votd']['reference'])} #my code, trying to only extract information I need
     #return {'reference': data['votd']['reference'], 'version': version, 'text': get_passage(data['votd']['reference'],
     #        version = version, numeration=False, title=False)['text']} -- original code
 
